@@ -1,0 +1,53 @@
+header{
+    display: flex;
+
+    align-items: center;
+}
+
+.img-logo-small{
+    height: 100px;
+    width: 100px;
+}
+
+ul li{
+    list-style: none;
+}
+
+a {
+    color: black;
+}
+
+a:hover{
+    text-decoration: none;
+    color: black;
+}
+
+div.active a {
+    text-decoration: underline;
+}
+
+.btn-add{
+    margin: 20px 0px;
+}
+
+.btn-back {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    background-color: white;
+    border: 0px;
+    padding: 5px 0px;
+    margin: 10px 0px;
+}
+
+.btn-back>* {
+    padding: 5px;
+}
+
+.btn-submit{
+    margin: 10px 0px;
+}
+
+.form{
+    width: 50%;
+}
