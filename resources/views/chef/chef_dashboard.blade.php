@@ -43,24 +43,14 @@
                         aria-expanded="false">
                         <i class="fa fa-bell" style="font-size:24px"></i>
                     </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="#">Action</a>
-                        <a class="dropdown-item" href="#">Another action</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="#">Something else here</a>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                        <?php foreach ($notifications as $notif) : ?>
+                            <a class="dropdown-item" href="{{@route('orderDetail',['orderid' => $notif->orderid])}}"><?php echo $notif->notification ?></a>
+                        <?php endforeach; ?> 
                     </div>
                 </li>
             </ul>
-            <form class="form-inline my-2 my-lg-0">
-                <div class="input-group mr-2">
-                    <input class="form-control" type="search" placeholder="Search">
-                    <div class="input-group-append">
-                        <button class="btn btn-outline-secondary" type="submit">
-                            <i class="fa fa-search"></i>
-                        </button>
-                    </div>
-                </div>
-            </form>
+            
             <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Log Out</button>
 
         </div>

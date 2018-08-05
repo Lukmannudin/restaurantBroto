@@ -4,12 +4,23 @@
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="apple-touch-icon" sizes="60x60" href="{{asset('img/apple-icon-60x60.png')}}">
+        <link rel="apple-touch-icon" sizes="72x72" href="{{asset('img/apple-icon-72x72.png')}}">
+        <link rel="apple-touch-icon" sizes="76x76" href="{{asset('img/apple-icon-76x76.png')}}">
+        <link rel="apple-touch-icon" sizes="114x114" href="{{asset('img/apple-icon-114x114.png')}}">
+        <link rel="apple-touch-icon" sizes="120x120" href="{{asset('img/apple-icon-120x120.png')}}">
+        <link rel="apple-touch-icon" sizes="144x144" href="{{asset('img/apple-icon-144x144.png')}}">
+        <link rel="apple-touch-icon" sizes="152x152" href="{{asset('img/apple-icon-152x152.png')}}">
+        <link rel="apple-touch-icon" sizes="180x180" href="{{asset('img/apple-icon-180x180.png')}}">
+        <link rel="icon" type="image/png" sizes="192x192"  href="{{asset('img/android-icon-192x192.png')}}">
+        <link rel="icon" type="image/png" sizes="32x32" href="{{asset('img/favicon-32x32.png')}}">
+        <link rel="icon" type="image/png" sizes="96x96" href="{{asset('img/favicon-96x96.png')}}">
+        <link rel="icon" type="image/png" sizes="16x16" href="{{asset('img/favicon-16x16.png')}}">
     <title>{{config('app.name')}}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.2/css/bootstrap.min.css" integrity="sha384-Smlep5jCw/wG7hdkwQ/Z5nLIefveQRIY9nfy6xoR1uRYBtpZgI6339F5dgvm/e9B"
         crossorigin="anonymous">
-        <link rel="shortcut icon" href="{{asset('img/resbroto.png')}}" type="image/x-icon">
     <link rel="stylesheet" type="text/css" media="screen" href="{{asset('css/main.css')}}" />
     <script src="main.js"></script>
 </head>
@@ -102,7 +113,10 @@
                         <?php $date = strtotime($order->dateOrder); ?>
                         <td><?php echo date('H:i:s',$date); ?></td>
                         <?php if ($order->status_order =="cooked") :?>
-                            <td><a href="{{@route('deliverOrder',['orderid' => $order->orderid])}}"><button class="btn">Deliver</button></a></td>
+                            <td>
+                            <a href="{{@route('deliverOrder',['orderid' => $order->orderid])}}"><button type="button" class="btn"> Deliver</button></a>
+                                <!-- <a href="{{@route('deliverOrder',['orderid' => $order->orderid])}}" class="btn"><button></button></a> -->
+                            </td>
                         <?php elseif($order->status_order == "delivered"): ?>
                             <td><button class="btn disabled">Delivered</button></td>
                         <?php else:?>

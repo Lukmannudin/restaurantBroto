@@ -104,8 +104,7 @@ Route::post('/searchRecipeWaiter/',function(){
 				->orWhere('price', 'like', '%'.$data['search'].'%')
 				->get();
 	$maxAvailable = maxAvailable();
-	// echo '<pre>';
-	// var_dump($maxAvailable);
+	
 	if (count($recipelist)>0) {
 		$message="";
 		$tablelist = DB::table('tables')->get();
@@ -118,7 +117,6 @@ Route::post('/searchRecipeWaiter/',function(){
 		$orderNotif = DB::select( DB::raw("SELECT * FROM `order_notifications` WHERE DATE(order_notifications.date) = DATE(CURDATE())") );	
 		return view('waiter.add_order',['recipes' => $recipelist, 'tables' => $tablelist,'notifications'=>$orderNotif,'message'=>$message]);	
 	}
-	
 })->name('searchRecipeWaiter');
 
 Route::post('/searchWaiter/',function(){
@@ -135,17 +133,14 @@ Route::post('/searchWaiter/',function(){
 		$orderNotif = DB::select( DB::raw("SELECT * FROM `order_notifications` WHERE DATE(order_notifications.date) = DATE(CURDATE())") );
 		if (count($orders)) {
 			return view('waiter.today_orders',['orders'=>$orders, 'notifications'=>$orderNotif]);
-		} else {
+		} 	
+	} else {
 			echo "<script>$('#orderidnotfound').modal('show');</script>";
 			$orders = DB::table('orders')->get();
 			$orderNotif = DB::select( DB::raw("SELECT * FROM `order_notifications` WHERE DATE(order_notifications.date) = DATE(CURDATE())") );
 			$notFound = TRUE;
 			$message = $data['search']." not found";
 			return view('waiter.today_orders',['orders'=>$orders, 'notifications'=>$orderNotif,'notFound'=>$notFound,'message'=>$message]);	
-		}	
-	} else {
-		alert('Failed to save');	
-		return redirect()->route('waiter');	
 	}
 })->name('searchWaiter');
 
@@ -161,6 +156,8 @@ Route::post('/categoryWaiter',function(){
 	}
 	
 })->name('categoryWaiter');
+
+
 
 Route::post('/orderWaiter',function(){
 	$data = Input::all();
@@ -341,8 +338,6 @@ Route::post('/searchOrderRecipeCustomer/',function(){
 	
 })->name('searchOrderRecipeCustomer');
 
-
-
 Route::post('/updateOrder/',function(){
 	$data = Input::all();
 	
@@ -469,8 +464,6 @@ Route::post('searchEditOrder',function(){
 	return view('waiter.edit_order',['dataEdit'=>$dataEdit,'tables'=>$tables,'recipes'=>$recipes,'notifications'=>$orderNotif, 'maxAvailable'=>$maxAvailable]);
 })->name('searchEditOrder');
 
-// Route::get('/chef','chefController@index');
-
 Route::get('chef/',function(){
 	$orderDeliveredCount = DB::table('orders')
 				->where('status_order','=','delivered')
@@ -506,6 +499,7 @@ Route::get('chef/',function(){
 						 endif;
 				endforeach;
 				
+	$orderNotif = DB::select( DB::raw("SELECT * FROM `order_notifications` WHERE DATE(order_notifications.date) = DATE(CURDATE())") );
 	
 	return view('chef.chef_dashboard',
 		[
@@ -513,7 +507,8 @@ Route::get('chef/',function(){
 			'orderCookedCount'=> $orderCookedCount,
 			'orderOrderedCount'=> $orderOrderedCount,
 			'recipeAvailableCount'=>$recipeAvailableCount,
-			'recipeUnvailableCount'=>$recipeUnvailableCount
+			'recipeUnvailableCount'=>$recipeUnvailableCount,
+			'notifications'=>$orderNotif 
 		]
 	);
 })->name('chef');
@@ -522,8 +517,48 @@ Route::get('chef/',function(){
 Route::get('/chefToday',function(){
 	$orders = DB::table('orders')
 				->get();
-	return view('chef/today_orders',['orders'=>$orders]);
+	$orderNotif = DB::select( DB::raw("SELECT * FROM `order_notifications` WHERE DATE(order_notifications.date) = DATE(CURDATE())") );
+
+	return view('chef.today_orders',['orders'=>$orders,'notifications'=>$orderNotif ]);
 })->name('chefToday');
+
+Route::post('/categoryChef',function(){
+	$data = Input::all();
+	if (isset($data['category'])) {
+		$orders = DB::select( DB::raw("select * from `orders` order by status_order = '".$data['category']."' desc") );
+		$orderNotif = DB::select( DB::raw("SELECT * FROM `order_notifications` WHERE DATE(order_notifications.date) = DATE(CURDATE())") );
+		return view('chef.today_orders',['orders'=>$orders, 'notifications'=>$orderNotif]);
+	} else {
+		return redirect()->route('chefToday');	
+	}
+})->name('categoryChef');
+
+Route::post('/searchChef/',function(){
+	$data = Input::all();
+	$orders = DB::table('orders')
+				->where('orderid', 'like', '%'.$data['search'].'%')
+				->orWhere('status_order', 'like', '%'.$data['search'].'%')
+				->orWhere('customer_name', 'like', '%'.$data['search'].'%')
+				->orWhere('dateOrder', 'like', '%'.$data['search'].'%')
+				->get();
+	
+
+	
+	if (count($orders)>0) {
+		$orderNotif = DB::select( DB::raw("SELECT * FROM `order_notifications` WHERE DATE(order_notifications.date) = DATE(CURDATE())") );
+		if (count($orders)) {
+			return view('chef.today_orders',['orders'=>$orders, 'notifications'=>$orderNotif]);
+		} 	
+	} else {
+			
+			$orders = DB::table('orders')->get();
+			$orderNotif = DB::select( DB::raw("SELECT * FROM `order_notifications` WHERE DATE(order_notifications.date) = DATE(CURDATE())") );
+			$notFound = TRUE;
+			$message = $data['search']." not found";
+			return view('chef.today_orders',['orders'=>$orders, 'notifications'=>$orderNotif,'notFound'=>$notFound,'message'=>$message]);	
+	}
+})->name('searchChef');
+
 
 Route::get('/recipeList',function(){
 	$recipeList = DB::table('recipes')
