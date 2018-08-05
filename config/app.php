@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'name' => env('APP_NAME', 'Laravel'),
+    'name' => env('APP_NAME', 'Resbroto'),
 
     /*
     |--------------------------------------------------------------------------
@@ -154,11 +154,11 @@ return [
         /*
          * Application Service Providers...
          */
-        App\Providers\AppServiceProvider::class,
-        App\Providers\AuthServiceProvider::class,
-        // App\Providers\BroadcastServiceProvider::class,
-        App\Providers\EventServiceProvider::class,
-        App\Providers\RouteServiceProvider::class,
+        resbroto\Providers\AppServiceProvider::class,
+        resbroto\Providers\AuthServiceProvider::class,
+        // resbroto\Providers\BroadcastServiceProvider::class,
+        resbroto\Providers\EventServiceProvider::class,
+        resbroto\Providers\RouteServiceProvider::class,
         'Collective\Html\HtmlServiceProvider',
 
     ],
@@ -211,7 +211,8 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'Input' => Illuminate\Support\Facades\Input::class,
         'Form' => 'Collective\Html\FormFacade',
-      'Html' => 'Collective\Html\HtmlFacade',
+        'Html' => 'Collective\Html\HtmlFacade',
+        'Carbon' => 'Carbon\Carbon',
      
     ],
 

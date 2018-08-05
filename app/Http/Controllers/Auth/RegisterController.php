@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Http\Controllers\Auth;
+namespace resbroto\Http\Controllers\Auth;
 
-use App\User;
-use App\Http\Controllers\Controller;
+use resbroto\User;
+use resbroto\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
-use App\Http\Requests\RegisterRequest;
-use App\Http\Requests\LoginRequest;
+use resbroto\Http\Requests\RegisterRequest;
+use resbroto\Http\Requests\LoginRequest;
 
 class RegisterController extends Controller
 {
@@ -53,7 +53,7 @@ class RegisterController extends Controller
      * Create a new user instance after a valid registration.
      *
      * @param  array  $data
-     * @return \App\User
+     * @return \resbroto\User
      */
     protected function create(array $data)
     {

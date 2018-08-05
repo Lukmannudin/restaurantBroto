@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Controllers\Auth;
+namespace resbroto\Http\Controllers\Auth;
 
-use App\Http\Controllers\Controller;
+use resbroto\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers; 
-use App\Http\Requests\LoginRequest;
+use resbroto\Http\Requests\LoginRequest;
 use Auth;
 
 class LoginController extends Controller

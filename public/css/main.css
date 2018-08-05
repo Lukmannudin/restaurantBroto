@@ -1,34 +1,22 @@
-header{
-    display: flex;
-
-    align-items: center;
-}
-
-.img-logo-small{
-    height: 100px;
-    width: 100px;
-}
-
-ul li{
+ul li {
     list-style: none;
 }
 
-a {
-    color: black;
+
+ input[type=number].no-spinner::-webkit-inner-spin-button,
+ input[type=number].no-spinner::-webkit-outer-spin-button {
+     -webkit-appearance: none;
+     margin: 0;
+ }
+
+
+.btn-info a, .btn-danger a , .btn-info a:hover, .btn-danger a:hover{
+    color: white;
 }
 
-a:hover{
-    text-decoration: none;
-    color: black;
-}
 
-div.active a {
-    text-decoration: underline;
-}
+/* back button */
 
-.btn-add{
-    margin: 20px 0px;
-}
 
 .btn-back {
     cursor: pointer;
@@ -38,16 +26,175 @@ div.active a {
     border: 0px;
     padding: 5px 0px;
     margin: 10px 0px;
+    padding-right: 7px;
 }
 
 .btn-back>* {
     padding: 5px;
 }
 
-.btn-submit{
-    margin: 10px 0px;
+
+/* waiter button edit delete */
+.btn-edit-delete{
+    -webkit-transition: .2s opacity ease-out;
+    -moz-transition: .2s opacity ease-out;
+    transition: .2s opacity ease-out;
+    opacity: 0;
 }
 
-.form{
-    width: 50%;
+tr:hover .btn-edit-delete{
+    opacity: 1;
 }
+
+
+/* chef cook button */
+.btn-cook:after {
+    content: "COOK";
+}
+
+.btn-cooked:after,
+.btn-cook:hover:after {
+    content: "COOKED";
+}
+
+/* ALL ADD BUTTON */
+.btn-add{
+    margin: 20px 0px;
+}
+
+/* waiter deliver button */
+
+.btn-deliver:after {
+    content: "DELIVER";
+}
+
+.btn-delivered:after,
+.btn-deliver:hover:after {
+    content: "DELIVERED";
+}
+
+/* ALL ADD BUTTON */
+
+.btn-add {
+    margin: 20px 0px;
+}
+
+
+
+/* LINKS */
+a{
+    opacity: 0.8;
+}
+
+a:hover{
+    opacity: 1;
+    text-decoration: none;
+}
+
+/* TABLE ID */
+th a {
+    color: rgba(0, 0, 255, 0.493);
+    text-decoration: underline;
+}
+
+
+
+/* SUB MENU */
+
+div.active a {
+    text-decoration: underline;
+}
+
+.submenu {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+ 
+}
+
+.submenu a {
+    color: black;
+}
+
+
+.vertical-line {
+    border: 0.5px solid black;
+    height: 40px;
+    margin-left: 0px;
+    margin-right: 0px;
+}
+
+
+/* cashier table */
+tr.disabled, tr.disabled a{
+    opacity: 0.5;
+    color: black;
+    pointer-events: none;
+}
+
+
+  .rating {
+    display: inline-block;
+    position: relative;
+    height: 50px;
+    line-height: 50px;
+    font-size: 50px;
+  }
+  
+  .rating label {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    cursor: pointer;
+  }
+  
+  .rating label:last-child {
+    position: static;
+  }
+  
+  .rating label:nth-child(1) {
+    z-index: 5;
+  }
+  
+  .rating label:nth-child(2) {
+    z-index: 4;
+  }
+  
+  .rating label:nth-child(3) {
+    z-index: 3;
+  }
+  
+  .rating label:nth-child(4) {
+    z-index: 2;
+  }
+  
+  .rating label:nth-child(5) {
+    z-index: 1;
+  }
+  
+  .rating label input {
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+  }
+  
+  .rating label .icon {
+    float: left;
+    color: transparent;
+  }
+  
+  .rating label:last-child .icon {
+    color: #000;
+  }
+  
+  .rating:not(:hover) label input:checked ~ .icon,
+  .rating:hover label:hover input ~ .icon {
+    color: #09f;
+  }
+  
+  .rating label input:focus:not(:checked) ~ .icon:last-child {
+    color: #000;
+    text-shadow: 0 0 5px #09f;
+  }
